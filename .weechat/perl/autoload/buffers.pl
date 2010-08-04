@@ -1,0 +1,1 @@
+/home/saul/.weechat/perl/buffers.pl

@@ -1,0 +1,144 @@
+!urxvt*termName: urxvt
+XTerm*termName: xterm-256color
+
+
+
+! ----------------------------------------------------------------------------
+! file:     ~/.Xdefaults
+! author:   Thayer Williams - http://cinderwick.ca
+! modified: June 2009
+! vim:enc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
+! ----------------------------------------------------------------------------
+
+! Xcursor --------------------------------------------------------------------
+
+Xcursor*theme:  Vanilla-DMZ-AA
+Xcursor.size:   22
+
+
+! terminal colors ------------------------------------------------------------
+
+! terminal colours
+urxvt*foreground:#a0a0a0
+urxvt*background:#1b1d1e
+
+!molokai inspired colors
+
+!black
+urxvt*color0:    #1b1d1e
+urxvt*color8:    #505354
+!red
+urxvt*color1:    #f92672
+urxvt*color9:    #ff5995
+!green
+urxvt*color2:    #82b414
+urxvt*color10:   #b6e354
+!yellow
+urxvt*color3:    #fd971f
+urxvt*color11:   #feed6c
+!blue
+urxvt*color4:    #56c2d6
+urxvt*color12:   #8cedff
+!magenta
+urxvt*color5:    #8c54fe
+urxvt*color13:   #9e6ffe
+!cyan
+urxvt*color6:    #465457
+urxvt*color14:   #899ca1
+!white
+urxvt*color7:    #ccccc6
+urxvt*color15:   #f8f8f2
+
+! rxvt-unicode ---------------------------------------------------------------
+
+!for normal X11 fonts:
+!*font:     -*-dina-medium-r-*-*-15-*-*-*-*-*-*-*
+!*boldFont: -*-dina-medium-r-*-*-15-*-*-*-*-*-*-*
+!urxvt*font:     -*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*
+
+! URxvt*font: xft:Inconsolata:pixelsize=18,\
+! xft:TlwgMono:pixelsize=24
+
+URxvt*font: xft:Inconsolata:pixelsize=18:antialias=true
+
+-misc-droid sans mono-*-*-*-*-*-*-*-*-*-*-*-*
+
+! xft:Purisa:style=Medium:pixelsize=24
+!xft:Kinnari:pixelsize=16
+!rxvt*boldFont:  -*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*
+
+!urxvt*geometry:         105x30
+urxvt*depth:            24
+urxvt*transparent:      true
+urxvt*internalBorder:   2
+urxvt*fading:           0
+urxvt*shading:          10
+urxvt*tintColor:        #000000
+urxvt*cursorColor:      #FD971F
+urxvt*inheritPixmap:    false
+urxvt*saveLines:        32767
+urxvt*visualBell:       false
+urxvt*urgentOnBell:       true
+urxvt*scrollTtyKeypress:true
+urxvt*scrollWithBuffer: false
+urxvt*scrollTtyOutput:  false
+urxvt*scrollBar:        false
+urxvt*loginShell:       true
+urxvt*cutchars:         "()*,<>[]{}|"
+urxvt*print-pipe:       cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+urxvt*secondaryScroll:  true
+urxvt*mapAlert:         true
+urxvt*utmpInhibit:      true
+urxvt*perl-lib:         /usr/lib/urxvt/perl/
+urxvt*perl-ext-common:  option-popup,matcher
+URxvt*urlLauncher: /usr/bin/chromium
+urxvt*matcher.button:   1
+URxvt.colorUL: #86a2be
+!urxvt*background:      rgba:2222/2222/2222/dddd
+
+URxvt.perl-ext:      default,mark-yank-urls
+URxvt.keysym.M-u:    perl:mark-yank-urls:activate_mark_mode
+! URxvt.urlLauncher:   firefox
+URxvt.underlineURLs: true
+
+aterm*tinting:#ffffff
+aterm*transparent:false
+aterm*shading:40
+aterm*scrollBar:false
+aterm*fade: 60
+aterm*geometry:85x30
+aterm*truetintingType:True
+
+
+
+! xterm ----------------------------------------------------------------------
+
+xterm*font:             -*-dina-medium-r-*-*-15-*-*-*-*-*-*-*
+xterm*boldFont:         -*-dina-medium-r-*-*-15-*-*-*-*-*-*-*
+xterm*dynamicColors:    true
+xterm*utf8:             2
+xterm*eightBitInput:    true
+xterm*saveLines:        32767
+xterm*scrollTtyKeypress:true
+xterm*scrollTtyOutput:  false
+xterm*scrollBar:        false
+xterm*jumpScroll:       true
+xterm*multiScroll:      true
+xterm*toolBar:          false
+xterm*loginShell:       true
+xterm*metaSendsEscape:  true
+
+
+! x11-ssh-askpass ------------------------------------------------------------
+
+x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+x11-ssh-askpass*background:             #000000
+x11-ssh-askpass*foreground:             #ffffff
+x11-ssh-askpass.Button*background:      #000000
+x11-ssh-askpass.Indicator*foreground:   #ff9900
+x11-ssh-askpass.Indicator*background:   #0a0a0a
+x11-ssh-askpass*topShadowColor:         #000000
+x11-ssh-askpass*bottomShadowColor:      #000000
+x11-ssh-askpass.*borderWidth:           1
+
+Xft.lcdfilter: lcddefault

@@ -1,0 +1,51 @@
+[general]
+# change to whatever you want:
+accounts = saulhoward 
+
+# Gives you a nice blinky output on the console so you know what's happening:
+# ui = Curses.Blinkenlights 
+
+# If uncommented, this would show nothing at all. Great for cronjobs or background-processes:
+ui = Noninteractive.Quiet 
+
+[Account saulhoward]
+# Profile-Name for the local Mails for a given Account
+localrepository = mylocal 
+
+# Profile-Name for the remote Mails for a given Account
+remoterepository = myremote 
+
+# fetches your mails every 5 Minutes
+autorefresh = 5 
+
+[Repository mylocal]
+# Way of storing Mails locally. Only Maildir is currently supported:
+type = Maildir 
+
+# Place where the synced Mails should be:
+localfolders = ~/mail 
+
+[Repository myremote]
+# Type of remote Mailbox. Only IMAP is supported right now:
+type = IMAP 
+
+# Where to connect:
+remotehost = imap.gmail.com 
+
+# Whether to use SSL or not:
+ssl = yes 
+
+# Would specify a port if uncommented. This way, it just tries to use a default-port:
+remoteport = 993 
+
+# Specify login-name:
+remoteuser = me@gmail.com 
+
+# Specify login-password (there are other/safer options for storing passwords for use by OfflineIMAP,
+# see the OfflineIMAP manual. Make sure that ~/.offlineimaprc is readable only by you, if you 
+# specify your password here!): 
+remotepass = passwordhere
+
+# folderfilter = lambda foldername: foldername not in
+# 	['Youtube', 'Wordpress', 'Facebook', 'GetAFreelancer']
+

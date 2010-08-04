@@ -1,0 +1,10 @@
+# text/html; w3m %s;
+text/html; uzbl-browser "%s";
+application/msword; wvText "%s" /dev/stdout; copiousoutput
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; wvText %s /dev/stdout; copiousoutput
+# application/pdf; pdftotext -layout -nopgbrk -enc UTF-8 "%s" /dev/stdout | less; 
+application/pdf; zathura "%s"; 
+image/pjpeg; feh -F "%s"; 
+image/jpeg; feh -F "%s"; 
+image/png; feh -F "%s"; 
+text/plain; less "%s" 
