@@ -122,6 +122,10 @@ set ruler
 set showmode
 set showcmd
 
+"mouse scroll
+set mouse=a
+set ttymouse=xterm2
+
 " Bash tab style completion is awesome
 set wildmode=longest,list
 " wildchar-the char used for "expansion" on the command line default value is
