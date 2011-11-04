@@ -7,16 +7,17 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
-naughty.config.presets.normal.icon_size = 48
+-- Load Debian menu entries
+require("debian.menu")
+
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
--- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
--- beautiful.init("/home/saul/.config/awesome/shiki-colors-theme.lua")
 beautiful.init("/home/saul/.config/awesome/elementary-theme.lua")
+naughty.config.presets.normal.icon_size = 48
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -30,59 +31,31 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.tile.right,
+    awful.layout.suit.floating,
+    awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier
 }
 -- }}}
--- layouts =
--- {
-    -- awful.layout.suit.floating,
-    -- awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.magnifier
--- }
+
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
-for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({"term", "www", "chat", "mail", "files", "float", "ssh"}, s, layouts[2])
-end
+-- for s = 1, screen.count() do
+    -- -- Each screen has its own tag table.
+    -- tags[s] = awful.tag({"term", "www", "chat", "mail", "files", "float", "ssh"}, s, layouts[2])
+-- end
+tags[1] = awful.tag({"term", "api", "ws", "seneca", "ssh"}, 1, layouts[1])
+tags[2] = awful.tag({"www", "www-dev", "chat", "mail", "files", "float", "term"}, 2, layouts[2])
 -- }}}
-
--- Keyboard map indicator and changer
-kbdcfg = {}
-kbdcfg.cmd = "setxkbmap"
-kbdcfg.layout = { "us", "th" }
-kbdcfg.current = 1  -- us is our default layout
-kbdcfg.widget = widget({ type = "textbox", align = "right" })
-if kbdcfg.layout[kbdcfg.current] == "us" then 
-    kbdcfg.widget.text = " en " 
-else 
-    kbdcfg.widget.text = " " .. kbdcfg.layout[kbdcfg.current] .. " "
-end
-kbdcfg.switch = function ()
-    kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
-    local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
-    if t == " us " then kbdcfg.widget.text = " en " else kbdcfg.widget.text = t end
-    os.execute( kbdcfg.cmd .. t )
-end
-
--- Mouse bindings
-kbdcfg.widget:buttons(awful.util.table.join(
-awful.button({ }, 1, function () kbdcfg.switch() end)
-))
-
-
 
 
 -- {{{ Menu
@@ -95,6 +68,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -106,9 +80,6 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
--- mytextclock = awful.widget.textclock({ align = "right" }, " %a %d %b, %H:%M ", 60)
--- mytextclock.text = string.lower(mytextclock.text)
--- mytextclock.add_signal("timeout",   function () mytextclock.text = string.lower(mytextclock.text) end)
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
@@ -172,7 +143,7 @@ for s = 1, screen.count() do
                                           end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", height = "24", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
@@ -181,10 +152,9 @@ for s = 1, screen.count() do
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
-        -- mylayoutbox[s],
+        mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
-        kbdcfg.widget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -203,6 +173,8 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey,           }, "h",   awful.tag.viewprev       ),
+    awful.key({ modkey,           }, "l",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
@@ -216,13 +188,13 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show(true)        end),
-    awful.key({ modkey,           }, "p", function () awful.util.spawn("dmenu_run -b -fn '-bitstream-bitstream vera sans-medium-r-normal-*-17-*-*-*-*-*-*-*'") end),
+    awful.key({ modkey,           }, "space", function () awful.util.spawn("dmenu_run -b -fn '-bitstream-bitstream vera sans-medium-r-normal-*-48-*-*-*-*-*-*-*'") end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "n", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey,           }, "p", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -237,14 +209,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ modkey, "Control" }, "j",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey, "Control" }, "k",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ modkey,           }, "w", function () awful.layout.inc(layouts,  1) end),
+    awful.key({ modkey, "Shift"   }, "w", function () awful.layout.inc(layouts, -1) end),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
@@ -336,111 +308,39 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-
     -- Set Firefox to always map on tags number 2 of screen 1.
-    { rule = { class = "Namoroka" }, -- Firefox dev version
-      properties = { tag = tags[1][2] } },
-    { rule = { class = "chromium" },
-      properties = { tag = tags[1][2] } },
-    { rule = { class = "empathy" },
-      properties = { tag = tags[1][3] } },
-    { rule = { instance = "skype" },
-      properties = { tag = tags[1][3] } },
-    { rule = { class = "Nautilus" },
-      properties = { tag = tags[1][5] } },
+    -- { rule = { class = "Firefox" },
+    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
-
 -- {{{ Signals
---
--- {{{ Manage signal handler
+-- Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
+    -- Add a titlebar
+    -- awful.titlebar.add(c, { modkey = modkey })
+
     -- Enable sloppy focus
-    c:add_signal("mouse::enter", function (c)
-        if  awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
+    c:add_signal("mouse::enter", function(c)
+        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+            and awful.client.focus.filter(c) then
             client.focus = c
         end
     end)
 
-    -- Client placement
     if not startup then
-        awful.client.setslave(c)
+        -- Set the windows at the slave,
+        -- i.e. put it at the end of others instead of setting it master.
+        -- awful.client.setslave(c)
 
-        if  not c.size_hints.user_position
-        and not c.size_hints.program_position then
+        -- Put windows in a smart way, only if they does not set an initial position.
+        if not c.size_hints.user_position and not c.size_hints.program_position then
             awful.placement.no_overlap(c)
             awful.placement.no_offscreen(c)
         end
     end
-
-    -- Honor size hints
-    c.size_hints_honor = false
-
-    -- Fix for pre_manage rules patch
-    client.focus = c
 end)
+
+client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
--- {{{ Focus signal handlers
-client.add_signal("focus",   function (c) 
-    c.border_color = beautiful.border_focus 
-    -- c.opacity = 1
-end)
-client.add_signal("unfocus", function (c) 
-    c.border_color = beautiful.border_normal 
-    -- c.opacity = 0.7
-end)
--- }}}
-
--- {{{ Arrange signal handler
-for s = 1, screen.count() do screen[s]:add_signal("arrange", function ()
-    local clients = awful.client.visible(s)
-    local layout  = awful.layout.getname(awful.layout.get(s))
-
-    if #clients > 0 then -- Fine grained borders and floaters control
-        for _, c in pairs(clients) do -- Floaters always have borders
-            if awful.client.floating.get(c) or layout == "floating" then
-                c.border_width = beautiful.border_width
-
-                if not c.fullscreen then -- Floaters have titlebars
-                    if not c.titlebar and c.class ~= "Xmessage" then
-                        awful.titlebar.add(c, { modkey = modkey })
-                    end -- Floaters are always on top
-                    c.above = true
-                end
-
-            -- No borders with only one visible client
-            elseif #clients == 1 or layout == "max" then
-                clients[1].border_width = 0
-                awful.titlebar.remove(c)
-            else
-                c.border_width = beautiful.border_width
-            end
-        end
-    end
-  end)
-end
--- }}}
--- }}}
-
-
-
-function run_once(prg)
-    if not prg then
-        do return nil end
-    end
-    awful.util.spawn_with_shell("pgrep -u $USER -x " .. prg .. " || (" .. prg .. ")")
-end
-
--- AUTORUN APPS!
-run_once("parcellite -d -n")
--- run_once("xxkb")
--- run_once("mail-notification")
--- run_once("empathy")
--- run_once("skype")
--- run_once("dropboxd") -- not on laptop (batt.)
--- run_once("dbus-launch nautilus --no-desktop &")
--- run_once("redshift-bkk.sh")
-

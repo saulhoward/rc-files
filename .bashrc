@@ -53,7 +53,6 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-
 # color man pages
 export LESS_TERMCAP_mb=$'\e[01;34m'
 export LESS_TERMCAP_md=$'\e[01;34m'
@@ -63,18 +62,8 @@ export LESS_TERMCAP_so=$'\e[01;44;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[38;05;111m;'
 
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
-# If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-    #PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    #;;
-#*)
-    #;;
-#esac
 
 # urxvt title
 case $TERM in
@@ -97,3 +86,9 @@ export PATH=$PATH:/home/saul/.gem/ruby/1.9.1/bin
 export RUBYOPT=rubygems
 export XDG_DATA_HOME=/home/saul/.data
 export TEXINPUTS=".:~/clwd-docs/latex:"
+
+# tmux ensure 256 color under ssh
+alias tmux="TERM=screen-256color-bce tmux"
+
+# read in dircolors
+eval `dircolors $HOME/.dircolors`
