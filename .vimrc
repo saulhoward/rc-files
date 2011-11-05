@@ -124,7 +124,8 @@ set showcmd
 
 "mouse scroll
 set mouse=a
-set ttymouse=xterm2
+" set ttymouse=xterm2 "Screen
+set ttymouse=xterm "Tmux
 
 " Bash tab style completion is awesome
 set wildmode=longest,list
@@ -173,6 +174,10 @@ if has("gui_running")
     " colo vitamins
     colo molokai
     set lines=73 columns=260
+elseif &diff
+    set t_Co=256
+    set background=dark
+    colorscheme peaksea
 else
     set t_Co=256
     " colorscheme vitamins
@@ -252,6 +257,7 @@ au FileType djangohtml set formatoptions+=l
 au FileType djangohtml set formatoptions-=t
 
 " for TXT (set up myself) auto-wrap
+au BufNewFile,BufRead *.txt         setf txt
 au FileType txt set formatoptions+=t
 au FileType mail set formatoptions+=t
 
@@ -512,6 +518,7 @@ let NERDTreeChDirMode='2'
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyo$', '\.pyc$', '\.svn[\//]$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\.bak$', '\~$']
 let NERDTreeQuitOnOpen = 1
+let NERDTreeWinSize=70
 
 "FuzzyFinder
 "Seriously FF, setting up your options sucks
@@ -600,6 +607,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " markdown
 augroup mkd
     autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+    autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 augroup END
 
 " au BufRead *sup.compose-mode        set ft=mail
@@ -608,3 +616,10 @@ au BufRead *sup.*        set ft=mail
 
 " VIMWIKI
 let g:vimwiki_list = [{'path': '~/repos/saul/wiki/'}]
+
+" diffs
+au FilterWritePre * if &diff | set virtualedit=all | endif
+au FilterWritePre * exe 'let b:syn = &syn | if &diff | set syn=OFF | endif'
+au BufWinEnter * if &fdm != "diff" | let b:fdm = &fdm | endif
+
+cmap w!! %!sudo tee > /dev/null %
