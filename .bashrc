@@ -51,7 +51,10 @@ set -o vi
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
 fi
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# oldskool prompt
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# unicode prompt
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\w\[\033[33m\] ▸▹ \[\033[00m\]'
 
 # color man pages
 export LESS_TERMCAP_mb=$'\e[01;34m'
@@ -86,6 +89,8 @@ export PATH=$PATH:/home/saul/.gem/ruby/1.9.1/bin
 export RUBYOPT=rubygems
 export XDG_DATA_HOME=/home/saul/.data
 export TEXINPUTS=".:~/clwd-docs/latex:"
+export TEXMFOUTPUT=";/home/saul/latex/outputs/"
+alias pdflatex='pdflatex -output-directory ~/latex/outputs '
 
 # tmux ensure 256 color under ssh
 alias tmux="TERM=screen-256color-bce tmux"
