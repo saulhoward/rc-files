@@ -179,7 +179,6 @@ elseif &diff
 else
     set t_Co=256
     colorscheme molokai
-    highlight Comment cterm=italic
 endif
 
 " Omni Completion *************************************************************
