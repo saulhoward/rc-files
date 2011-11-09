@@ -168,10 +168,8 @@ set mousehide
 syntax on
 set background=dark
 if has("gui_running")
-    "set guifont=Consolas:h12.00  " use this font
     set transparency=6    " Barely transparent
     let moria_style = 'black'
-    " colo vitamins
     colo molokai
     set lines=73 columns=260
 elseif &diff
@@ -180,8 +178,8 @@ elseif &diff
     colorscheme peaksea
 else
     set t_Co=256
-    " colorscheme vitamins
     colorscheme molokai
+    highlight Comment cterm=italic
 endif
 
 " Omni Completion *************************************************************

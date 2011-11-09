@@ -1,20 +1,9 @@
 !urxvt*termName: urxvt
 XTerm*termName: xterm-256color
 
-
-
-! ----------------------------------------------------------------------------
-! file:     ~/.Xdefaults
-! author:   Thayer Williams - http://cinderwick.ca
-! modified: June 2009
-! vim:enc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=xdefaults:
-! ----------------------------------------------------------------------------
-
 ! Xcursor --------------------------------------------------------------------
-
 Xcursor*theme:  Vanilla-DMZ-AA
 Xcursor.size:   22
-
 
 ! terminal colors ------------------------------------------------------------
 
@@ -51,21 +40,18 @@ urxvt*color15:   #f8f8f2
 
 ! rxvt-unicode ---------------------------------------------------------------
 
-!for normal X11 fonts:
-!*font:     -*-dina-medium-r-*-*-15-*-*-*-*-*-*-*
-!*boldFont: -*-dina-medium-r-*-*-15-*-*-*-*-*-*-*
-!urxvt*font:     -*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*
+!-- Xft settings -- !
+!Xft.dpi:        96
+!Xft.antialias:  true
+!Xft.rgba:       rgb
+!Xft.hinting:    true
+!Xft.hintstyle:   hintslight
 
-! URxvt*font: xft:Inconsolata:pixelsize=18,\
-! xft:TlwgMono:pixelsize=24
-
-URxvt*font: xft:Inconsolata:pixelsize=18:antialias=true
-
--misc-droid sans mono-*-*-*-*-*-*-*-*-*-*-*-*
-
-! xft:Purisa:style=Medium:pixelsize=24
-!xft:Kinnari:pixelsize=16
-!rxvt*boldFont:  -*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*
+! -- Fonts -- !
+urxvt*font: xft:Ubuntu Mono:regular:pixelsize=18
+urxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=18
+urxvt*italicFont: xft:Ubuntu Mono:italic:pixelsize=18
+urxvt*bolditalicFont: xft:Ubuntu Mono:bold:italic:pixelsize=18
 
 !urxvt*geometry:         105x30
 urxvt*depth:            24
@@ -78,7 +64,7 @@ urxvt*cursorColor:      #FD971F
 urxvt*inheritPixmap:    false
 urxvt*saveLines:        32767
 urxvt*visualBell:       false
-urxvt*urgentOnBell:       true
+urxvt*urgentOnBell:     true
 urxvt*scrollTtyKeypress:true
 urxvt*scrollWithBuffer: false
 urxvt*scrollTtyOutput:  false
@@ -91,14 +77,13 @@ urxvt*mapAlert:         true
 urxvt*utmpInhibit:      true
 urxvt*perl-lib:         /usr/lib/urxvt/perl/
 urxvt*perl-ext-common:  option-popup,matcher
-URxvt*urlLauncher: /usr/bin/chromium
+URxvt*urlLauncher:      /usr/bin/chromium
 urxvt*matcher.button:   1
-URxvt.colorUL: #86a2be
+URxvt.colorUL:          #86a2be
 !urxvt*background:      rgba:2222/2222/2222/dddd
 
 URxvt.perl-ext:      default,mark-yank-urls
 URxvt.keysym.M-u:    perl:mark-yank-urls:activate_mark_mode
-! URxvt.urlLauncher:   firefox
 URxvt.underlineURLs: true
 
 aterm*tinting:#ffffff
@@ -108,8 +93,6 @@ aterm*scrollBar:false
 aterm*fade: 60
 aterm*geometry:85x30
 aterm*truetintingType:True
-
-
 
 ! xterm ----------------------------------------------------------------------
 
