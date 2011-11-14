@@ -48,10 +48,10 @@ urxvt*color15:   #f8f8f2
 !Xft.hintstyle:   hintslight
 
 ! -- Fonts -- !
-urxvt*font: xft:Ubuntu Mono:regular:pixelsize=18
-urxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=18
-urxvt*italicFont: xft:Ubuntu Mono:italic:pixelsize=18
-urxvt*bolditalicFont: xft:Ubuntu Mono:bold:italic:pixelsize=18
+urxvt*font: xft:Ubuntu Mono:regular:pixelsize=18:autohint=true
+urxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=18:autohint=true
+urxvt*italicFont: xft:Ubuntu Mono:italic:pixelsize=18:autohint=true
+urxvt*bolditalicFont: xft:Ubuntu Mono:bold:italic:pixelsize=18:autohint=true
 
 !urxvt*geometry:         105x30
 urxvt*depth:            24
@@ -80,6 +80,7 @@ urxvt*perl-ext-common:  option-popup,matcher
 URxvt*urlLauncher:      /usr/bin/chromium
 urxvt*matcher.button:   1
 URxvt.colorUL:          #86a2be
+URxvt*iconFile:         /usr/share/icons/elementary/apps/24/terminal.svg
 !urxvt*background:      rgba:2222/2222/2222/dddd
 
 URxvt.perl-ext:      default,mark-yank-urls
