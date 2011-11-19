@@ -1,4 +1,5 @@
 !urxvt*termName: urxvt
+!urxvt*termName: screen-256color
 XTerm*termName: xterm-256color
 
 ! Xcursor --------------------------------------------------------------------
@@ -54,7 +55,6 @@ urxvt*italicFont: xft:Ubuntu Mono:italic:pixelsize=18:autohint=true
 urxvt*bolditalicFont: xft:Ubuntu Mono:bold:italic:pixelsize=18:autohint=true
 
 !urxvt*geometry:         105x30
-urxvt*depth:            24
 urxvt*transparent:      true
 urxvt*internalBorder:   2
 urxvt*fading:           0
@@ -82,6 +82,9 @@ urxvt*matcher.button:   1
 URxvt.colorUL:          #86a2be
 URxvt*iconFile:         /usr/share/icons/elementary/apps/24/terminal.svg
 !urxvt*background:      rgba:2222/2222/2222/dddd
+urxvt*background:       rgba:0000/0000/0000/eeee
+!urxvt*depth:            24
+urxvt*depth:             32
 
 URxvt.perl-ext:      default,mark-yank-urls
 URxvt.keysym.M-u:    perl:mark-yank-urls:activate_mark_mode
