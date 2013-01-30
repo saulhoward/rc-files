@@ -182,11 +182,12 @@ au FileType txt set formatoptions+=t
 au FileType mail set formatoptions+=t
 
 " markdown
+au BufRead,BufNewFile *.md set filetype=markdown
 augroup mkd
-    autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 augroup END
+au BufRead,BufNewFile *.fountain     set filetype=fountain
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
@@ -387,5 +388,6 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 " vim-scripts repos
 Bundle 'vimwiki'
+Bundle 'fountain.vim'
 
 filetype plugin indent on " required!
