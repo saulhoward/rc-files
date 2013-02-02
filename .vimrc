@@ -364,7 +364,7 @@ au BufWinEnter * if &fdm != "diff" | let b:fdm = &fdm | endif
 " -----------------------------------------------------------------------------
 
 " original repos on github
-Bundle 'tomasr/molokai'
+Bundle 'saulhoward/molokai'
 Bundle 'scrooloose/nerdtree'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'tomtom/tcomment_vim'
