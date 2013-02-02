@@ -114,23 +114,6 @@ set incsearch
 set gdefault
 set mousehide
 
-" Colors **********************************************************************
-syntax on
-set background=dark
-if has("gui_running")
-    set transparency=6    " Barely transparent
-    let moria_style = 'black'
-    colo molokai
-    set lines=73 columns=260
-elseif &diff
-    set t_Co=256
-    set background=dark
-    colorscheme peaksea
-else
-    set t_Co=256
-    colorscheme molokai
-endif
-
 " Omni Completion *************************************************************
 " set ofu=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -381,13 +364,36 @@ au BufWinEnter * if &fdm != "diff" | let b:fdm = &fdm | endif
 " -----------------------------------------------------------------------------
 
 " original repos on github
+Bundle 'tomasr/molokai'
 Bundle 'scrooloose/nerdtree'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 " vim-scripts repos
+Bundle 'peaksea'
 Bundle 'vimwiki'
 Bundle 'fountain.vim'
 
 filetype plugin indent on " required!
+
+
+" Colors **********************************************************************
+" Has to be after Vundle because molokai is loaded
+syntax on
+set background=dark
+if has("gui_running")
+    set transparency=6    " Barely transparent
+    let moria_style = 'black'
+    color molokai
+    set lines=73 columns=260
+elseif &diff
+    set t_Co=256
+    set background=dark
+    colorscheme peaksea
+else
+    set t_Co=256
+    colorscheme molokai
+endif
+
+
