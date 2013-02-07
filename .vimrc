@@ -26,6 +26,7 @@ set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}]              " file format
 set statusline+=%h%m%r%w                     " flags
+set statusline+=%{fugitive#statusline()}     " git branch (uses fugitive)
 set statusline+=%=                           "left/right separator
 " set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
 set statusline+=%b,0x%-6B                    " current char
