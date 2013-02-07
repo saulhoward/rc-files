@@ -343,6 +343,7 @@ nmap <F3> :silent %w !xclip -selection clipboard<CR>
 " let g:miniBufExplMapWindowNavVim = 1
 " let g:miniBufExplVSplit = 25
 " let g:miniBufExplSplitBelow=1
+let g:miniBufExplorerMoreThanOne=3 "fixes conflict with fugitive :Gdiff
 let g:bufExplorerSortBy = "name"
 autocmd BufRead,BufNew :call UMiniBufExplorer
 " map <leader>b :TMiniBufExplorer<cr>:TMiniBufExplorer<cr>
