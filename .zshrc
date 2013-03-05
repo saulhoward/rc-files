@@ -1,7 +1,11 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+
 bindkey -v
+bindkey '\e[3~' delete-char
+bindkey '^R' history-incremental-search-backward
+
 zstyle :compinstall filename '/home/saul/.zshrc'
 autoload -U compinit promptinit
 compinit
