@@ -151,6 +151,7 @@ au BufNewFile,BufRead *.lzx         setf lzx
 au BufNewFile,BufRead *.module      setf php
 au BufNewFile,BufRead *.inc         setf php
 au BufNewFile,BufRead *.pl,*.pm,*.t setf perl
+au BufRead,BufNewFile *.twig set filetype=htmldjango
 au FileType c,cpp,slang        set cindent
 au FileType c set formatoptions+=ro
 au FileType perl set smartindent
@@ -158,8 +159,8 @@ au FileType python set formatoptions-=t
 au FileType css set smartindent
 au FileType xhtml set formatoptions+=l
 au FileType xhtml set formatoptions-=t
-au FileType djangohtml set formatoptions+=l
-au FileType djangohtml set formatoptions-=t
+au FileType htmldjango set formatoptions+=l
+au FileType htmldjango set formatoptions-=t
 
 au BufNewFile,BufRead *.txt         setf txt
 au FileType txt set formatoptions+=t
