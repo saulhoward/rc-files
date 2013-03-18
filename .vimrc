@@ -361,6 +361,8 @@ au FilterWritePre * if &diff | set virtualedit=all | endif
 au FilterWritePre * exe 'let b:syn = &syn | if &diff | set syn=OFF | endif'
 au BufWinEnter * if &fdm != "diff" | let b:fdm = &fdm | endif
 
+" ctrl-p
+let g:ctrlp_map = '<c-a>'
 
 " -----------------------------------------------------------------------------
 " | VUNDLE                                                                  |
@@ -373,6 +375,8 @@ Bundle 'fholgado/minibufexpl.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'pangloss/vim-javascript'
+Bundle 'kien/ctrlp.vim'
 " vim-scripts repos
 Bundle 'peaksea'
 Bundle 'vimwiki'
@@ -388,7 +392,8 @@ set background=dark
 if has("gui_running")
     set transparency=6    " Barely transparent
     let moria_style = 'black'
-    color molokai
+    " color molokai
+    " color tomorrow-saul
     set lines=73 columns=260
 elseif &diff
     set t_Co=256
@@ -396,7 +401,8 @@ elseif &diff
     colorscheme peaksea
 else
     set t_Co=256
-    colorscheme molokai
+    " colorscheme molokai
+    colorscheme tomorrow
 endif
 
 
