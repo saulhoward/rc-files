@@ -20,18 +20,17 @@ set wildmenu
 set viminfo=/50,'50,h
 
 " Custom status line
-set statusline=                              " clear the statusline for when vimrc is reloaded
-set statusline+=%f\                          " file name
-set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%h%m%r%w                     " flags
-set statusline+=%{fugitive#statusline()}     " git branch (uses fugitive)
-set statusline+=%=                           "left/right separator
-" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-set statusline+=%b,0x%-6B                    " current char
-set statusline+=%c,%l/                       "cursor column/total lines
-set statusline+=%L\ %P                       "total lines/percentage in file
+" set statusline=                              " clear the statusline for when vimrc is reloaded
+" set statusline+=%f\                          " file name
+" set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+" set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+" set statusline+=%{&fileformat}]              " file format
+" set statusline+=%h%m%r%w                     " flags
+" set statusline+=%{fugitive#statusline()}     " git branch (uses fugitive)
+" set statusline+=%=                           "left/right separator
+" set statusline+=%b,0x%-6B                    " current char
+" set statusline+=%c,%l/                       "cursor column/total lines
+" set statusline+=%L\ %P                       "total lines/percentage in file
 
 set hidden
 set backspace=indent,eol,start
@@ -136,6 +135,10 @@ set formatoptions=cq
 set textwidth=72
 set comments+=b:\"
 set comments+=n::
+
+" Colour column
+" let &colorcolumn=join(range(81,999),",")
+let &colorcolumn="80,".join(range(120,999),",")
 
 " File Stuff ******************************************************************
 " To show current filetype use: set filetype
@@ -314,15 +317,39 @@ cmap w!! %!sudo tee > /dev/null %
 " -----------------------------------------------------------------------------
 " | Plugins                                                                  |
 " -----------------------------------------------------------------------------
-"NERDTree
-map <silent> \e :NERDTreeToggle<CR>
-let NERDTreeWinPos='right'
-let NERDTreeChDirMode='2'
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyo$', '\.pyc$', '\.svn[\//]$', '\.swp$']
-let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\.bak$', '\~$']
-let NERDTreeQuitOnOpen = 1
-let NERDTreeWinSize=70
-map <Leader>n :NERDTreeToggle<cr>
+
+" airline
+let g:airline_left_sep = '◣'
+let g:airline_right_sep = '◢'
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+nnoremap <leader>t :Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :Unite -no-split -buffer-name=files   -start-insert file<cr>
+nnoremap <leader>r :Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+nnoremap <leader>o :Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :Unite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>e :Unite -no-split -buffer-name=buffer  buffer<cr>
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
+
+"vimfiler
+let g:vimfiler_as_default_explorer = 1
+" Enable file operation commands.
+"let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+nnoremap <silent> <leader>d :<C-u>VimFilerExplorer<CR>
 
 "newrw
 let g:netrw_hide              = 1
@@ -334,35 +361,9 @@ let g:netrw_special_syntax    = 1
 " Copy file to clipboard
 nmap <F3> :silent %w !xclip -selection clipboard<CR>
 
-" minibufexpl
-" Don't load minbufexplorer
-" let loaded_minibufexplorer = 1
-" let g:miniBufExplModSelTarget = 1
-" let g:miniBufExplorerMoreThanOne = 2
-" let g:miniBufExplModSelTarget = 0
-" let g:miniBufExplUseSingleClick = 1
-" let g:miniBufExplMapWindowNavVim = 1
-" let g:miniBufExplVSplit = 25
-" let g:miniBufExplSplitBelow=1
-let g:miniBufExplorerMoreThanOne=3 "fixes conflict with fugitive :Gdiff
-let g:bufExplorerSortBy = "name"
-autocmd BufRead,BufNew :call UMiniBufExplorer
-" map <leader>b :TMiniBufExplorer<cr>:TMiniBufExplorer<cr>
-map <Leader>b :MiniBufExplorer<cr>
-autocmd BufNew -MiniBufExplorer- setlocal laststatus=0
-autocmd BufEnter -MiniBufExplorer- setlocal laststatus=0
-
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/wiki/',
                      \ 'syntax': 'markdown', 'ext': '.md'}]
-
-" diffs
-au FilterWritePre * if &diff | set virtualedit=all | endif
-au FilterWritePre * exe 'let b:syn = &syn | if &diff | set syn=OFF | endif'
-au BufWinEnter * if &fdm != "diff" | let b:fdm = &fdm | endif
-
-" ctrl-p
-let g:ctrlp_map = '<c-a>'
 
 " -----------------------------------------------------------------------------
 " | VUNDLE                                                                  |
@@ -370,13 +371,14 @@ let g:ctrlp_map = '<c-a>'
 
 " original repos on github
 Bundle 'saulhoward/molokai'
-Bundle 'scrooloose/nerdtree'
-Bundle 'fholgado/minibufexpl.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/unite-outline'
+Bundle 'Shougo/vimfiler.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'pangloss/vim-javascript'
-Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
+Bundle 'bling/vim-bufferline'
 " vim-scripts repos
 Bundle 'peaksea'
 Bundle 'vimwiki'
@@ -390,19 +392,22 @@ filetype plugin indent on " required!
 syntax on
 set background=dark
 if has("gui_running")
-    set transparency=6    " Barely transparent
-    let moria_style = 'black'
-    " color molokai
-    " color tomorrow-saul
+    colorscheme tomorrow
+    set guifont=Ubuntu\ Mono\ 14
+    set guioptions-=m  "menu bar
+    set guioptions-=T  "toolbar
+    set guioptions+=LlRrb "scrollbars
+    set guioptions-=LlRrb
     set lines=73 columns=260
-elseif &diff
-    set t_Co=256
-    set background=dark
-    colorscheme peaksea
+" elseif &diff
+"     set t_Co=256
+"     set background=dark
+"     colorscheme peaksea
 else
     set t_Co=256
-    " colorscheme molokai
     colorscheme tomorrow
 endif
 
+"unite setting
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
