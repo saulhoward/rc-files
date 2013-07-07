@@ -318,9 +318,19 @@ cmap w!! %!sudo tee > /dev/null %
 " | Plugins                                                                  |
 " -----------------------------------------------------------------------------
 
-" airline
-let g:airline_left_sep = '◣'
-let g:airline_right_sep = '◢'
+"" airline settings
+" remove separators
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" remove unused modes
+let g:airline_enable_syntastic=0
+" set second section to filename
+let g:airline_section_b="%f"
+" empty third and fourth sections
+let g:airline_section_c=""
+let g:airline_section_x=""
+" put filetype in fifth section
+let g:airline_section_y="%Y"
 
 " Unite
 let g:unite_source_history_yank_enable = 1
