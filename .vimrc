@@ -5,33 +5,23 @@
 " -----------------------------------------------------------------------------
 set nocompatible
 
-"" VUNDLE
-filetype off "required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-" let Vundle manage Vundle
-" " required! 
-Bundle 'gmarik/vundle'
-"" VUNDLE
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+NeoBundle 'Shougo/vimproc'
 
 autocmd!
 set autoread
 set wildmenu
 set viminfo=/50,'50,h
-
-" Custom status line
-" set statusline=                              " clear the statusline for when vimrc is reloaded
-" set statusline+=%f\                          " file name
-" set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-" set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-" set statusline+=%{&fileformat}]              " file format
-" set statusline+=%h%m%r%w                     " flags
-" set statusline+=%{fugitive#statusline()}     " git branch (uses fugitive)
-" set statusline+=%=                           "left/right separator
-" set statusline+=%b,0x%-6B                    " current char
-" set statusline+=%c,%l/                       "cursor column/total lines
-" set statusline+=%L\ %P                       "total lines/percentage in file
-
 set hidden
 set backspace=indent,eol,start
 set number
@@ -334,12 +324,32 @@ let g:airline_section_y="%Y"
 
 " Unite
 let g:unite_source_history_yank_enable = 1
+
+if executable('ag')
+  " Use ag in unite grep source.
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack-grep')
+  " Use ack in unite grep source.
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color --nogroup --with-filename'
+  let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack')
+  " Use ack in unite grep source.
+  let g:unite_source_grep_command = 'ack'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color --nogroup --with-filename'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
 nnoremap <leader>t :Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
 nnoremap <leader>f :Unite -no-split -buffer-name=files   -start-insert file<cr>
 nnoremap <leader>r :Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 nnoremap <leader>o :Unite -no-split -buffer-name=outline -start-insert outline<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank    history/yank<cr>
 nnoremap <leader>e :Unite -no-split -buffer-name=buffer  buffer<cr>
+nnoremap <leader>g :Unite -no-split -buffer-name=grep  grep:.<cr>
+
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
@@ -376,29 +386,31 @@ let g:vimwiki_list = [{'path': '~/Dropbox/wiki/',
                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " -----------------------------------------------------------------------------
-" | VUNDLE                                                                  |
+" | NeoBundle                                                                 |
 " -----------------------------------------------------------------------------
 
 " original repos on github
-Bundle 'saulhoward/molokai'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/unite-outline'
-Bundle 'Shougo/vimfiler.vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'pangloss/vim-javascript'
-Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
+NeoBundle 'saulhoward/molokai'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'bling/vim-bufferline'
 " vim-scripts repos
-Bundle 'peaksea'
-Bundle 'vimwiki'
-Bundle 'fountain.vim'
+NeoBundle 'peaksea'
+NeoBundle 'vimwiki'
+NeoBundle 'fountain.vim'
 
 filetype plugin indent on " required!
 
+" Installation check.
+NeoBundleCheck
 
 " Colors **********************************************************************
-" Has to be after Vundle because molokai is loaded
+" Has to be after bundle because molokai is loaded
 syntax on
 set background=dark
 if has("gui_running")
@@ -418,6 +430,7 @@ else
     colorscheme tomorrow
 endif
 
-"unite setting
+"unite settings
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+au BufReadPost *.md call unite#sources#outline#alias('vimwiki', 'markdown')
 
