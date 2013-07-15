@@ -322,6 +322,8 @@ let g:airline_section_x=""
 " put filetype in fifth section
 let g:airline_section_y="%Y"
 
+let g:airline_theme="dark"
+
 " Unite
 let g:unite_source_history_yank_enable = 1
 
