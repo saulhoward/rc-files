@@ -362,6 +362,7 @@ endfunction
 
 "vimfiler
 let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_enable_auto_cd  = 1
 " Enable file operation commands.
 "let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_tree_leaf_icon = ' '
@@ -370,13 +371,6 @@ let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 nnoremap <silent> <leader>d :<C-u>VimFilerExplorer<CR>
-
-"newrw
-let g:netrw_hide              = 1
-let g:netrw_list_hide         = '^\.svn.*'
-let g:netrw_menu              = 0
-let g:netrw_silent            = 1
-let g:netrw_special_syntax    = 1
 
 " Copy file to clipboard
 nmap <F3> :silent %w !xclip -selection clipboard<CR>
