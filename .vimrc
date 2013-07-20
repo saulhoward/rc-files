@@ -349,7 +349,7 @@ nnoremap <leader>f :Unite -no-split -buffer-name=files   -start-insert file<cr>
 nnoremap <leader>r :Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 nnoremap <leader>o :Unite -no-split -buffer-name=outline -start-insert outline<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank    history/yank<cr>
-nnoremap <leader>e :Unite -no-split -buffer-name=buffer  buffer<cr>
+nnoremap <leader>e :Unite -no-split -buffer-name=buffer  -wrap buffer<cr>
 nnoremap <leader>g :Unite -no-split -buffer-name=grep  grep:.<cr>
 
 " Custom mappings for the unite buffer
