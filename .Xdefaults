@@ -53,6 +53,10 @@ urxvt*font: xft:Ubuntu Mono:regular:pixelsize=18:autohint=true
 urxvt*boldFont: xft:Ubuntu Mono:bold:pixelsize=18:autohint=true
 urxvt*italicFont: xft:Ubuntu Mono:italic:pixelsize=18:autohint=true
 urxvt*bolditalicFont: xft:Ubuntu Mono:bold:italic:pixelsize=18:autohint=true
+!
+! IBus https://wiki.archlinux.org/index.php/IBus#rxvt-unicode
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
 
 !urxvt*geometry:         105x30
 urxvt*transparent:      true
