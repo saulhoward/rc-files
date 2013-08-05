@@ -1,22 +1,20 @@
-" .vimrc by Saul <saul@saulhoward.com>
+"vimrc by Saul <saul@saulhoward.com>
 
-" -----------------------------------------------------------------------------
-" | General settings                                                                  |
-" -----------------------------------------------------------------------------
 set nocompatible
 
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-
 call neobundle#rc(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Recommended to install
-" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 autocmd!
 set autoread
@@ -40,37 +38,13 @@ set previewheight=8
 set ls=2
 execute 'set listchars+=tab:' . nr2char(187) . nr2char(183)
 au CursorHold * checktime
-
-" Tabs **********************************************************************
-function! Tabstyle_tabs()
-  " Using 4 column tabs
-  set softtabstop=4
-  set shiftwidth=4
-  set tabstop=4
-  set noexpandtab
-endfunction
-
-function! Tabstyle_spaces()
-  " Use 2 spaces
-  set softtabstop=2
-  set shiftwidth=2
-  set tabstop=2
-  set expandtab
-endfunction
-
-" Tabs should be converted to a group of 4 spaces.
-" indent length with < >
 set shiftwidth=4
 set tabstop=4
-"Insert spaces for tabs
 set smarttab
 set expandtab
 set shiftround
-
-" Scrollbars/Status ***********************************************************
 set sidescrolloff=2
 set scrolloff=2
-" set numberwidth=4
 set title
 set ruler
 set showmode
@@ -94,7 +68,6 @@ set noequalalways
 
 " Cursor highlights ***********************************************************
 set cursorline
-"set cursorcolumn
 
 " Searching *******************************************************************
 set hlsearch
@@ -187,6 +160,8 @@ set complete-=k complete+=k
 
 au FileType * exec('setlocal dict+='.$VIMRUNTIME.'/syntax/'.expand('<amatch>').'.vim')
 
+au BufRead,BufNewFile *.pp              set filetype=puppet
+
 " Redraw *********************************************************************
 set ttyfast
 "set ttyscroll=0
@@ -231,58 +206,7 @@ nnoremap \tl :set invlist list?<CR>
 nnoremap \th :set invhls hls?<CR>
 "toggle numbers
 nnoremap \tn :set number!<Bar> set number?<CR>
-"toggle wrap and easy movement keys while in wrap mode
-noremap <silent> <Leader>tw :call ToggleWrap()<CR>
-function! ToggleWrap()
-  if &wrap
-    echo "Wrap OFF"
-    setlocal nowrap
-    set virtualedit=all
-    silent! nunmap <buffer> k
-    silent! nunmap <buffer> j
-    silent! nunmap <buffer> 0
-    silent! nunmap <buffer> $
-    silent! nunmap <buffer> <Up>
-    silent! nunmap <buffer> <Down>
-    silent! nunmap <buffer> <Home>
-    silent! nunmap <buffer> <End>
-    silent! iunmap <buffer> <Up>
-    silent! iunmap <buffer> <Down>
-    silent! iunmap <buffer> <Home>
-    silent! iunmap <buffer> <End>
-  else
-    echo "Wrap ON"
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal display+=lastline
-    noremap  <buffer> <silent> k gk
-    noremap  <buffer> <silent> j gj
-    noremap  <buffer> <silent> 0 g0
-    noremap  <buffer> <silent> $ g$
-    noremap  <buffer> <silent> <Up>   gk
-    noremap  <buffer> <silent> <Down> gj
-    noremap  <buffer> <silent> <Home> g<Home>
-    noremap  <buffer> <silent> <End>  g<End>
-    inoremap <buffer> <silent> <Up>   <C-o>gk
-    inoremap <buffer> <silent> <Down> <C-o>gj
-    inoremap <buffer> <silent> <Home> <C-o>g<Home>
-    inoremap <buffer> <silent> <End>  <C-o>g<End>
-  endif
-endfunction
-
-" toggle showbreak for long lines
-function! TYShowBreak()
-  if &showbreak == ''
-    set showbreak=>
-    echo "show break on"
-  else
-    set showbreak=
-    echo "show break off"
-  endif
-endfunction
-nmap  <expr> \tb  TYShowBreak()
-
-"clear the fucking search buffer, not just remove the highlight
+"clear the search buffer, not just remove the highlight
 map \h :let @/ = ""<CR>
 
 " Revert the current buffer
@@ -330,7 +254,7 @@ let g:unite_source_history_yank_enable = 1
 if executable('ag')
   " Use ag in unite grep source.
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--smart-case --nocolor --nogroup --hidden'
+  let g:unite_source_grep_default_opts = '--smart-case --skip-vcs-ignores --nocolor --nogroup --hidden'
   let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack-grep')
   " Use ack in unite grep source.
@@ -393,6 +317,9 @@ NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'puppetlabs/puppet-syntax-vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'bling/vim-bufferline'
 " vim-scripts repos
