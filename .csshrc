@@ -1,0 +1,5 @@
+terminal=/usr/bin/urxvtc
+terminal_allow_send_events=-xrm '*.VT100.allowSendEvents:true'
+terminal_args=-name CSSH
+terminal_colorize=0
+#terminal_font=0
