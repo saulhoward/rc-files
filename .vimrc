@@ -245,8 +245,8 @@ let g:airline_section_c=""
 let g:airline_section_x=""
 " put filetype in fifth section
 let g:airline_section_y="%Y"
-
 let g:airline_theme="dark"
+let g:airline_detect_whitespace=0
 
 " Unite
 let g:unite_source_history_yank_enable = 1
@@ -296,7 +296,9 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-nnoremap <silent> <leader>d :<C-u>VimFilerExplorer<CR>
+
+" nnoremap <silent> <leader>d :<C-u>VimFilerExplorer<CR>
+nnoremap <silent> <leader>d :<C-u>VimFiler -quit -buffer-name=explorer<CR>
 
 " Copy file to clipboard
 nmap <F3> :silent %w !xclip -selection clipboard<CR>
@@ -304,6 +306,11 @@ nmap <F3> :silent %w !xclip -selection clipboard<CR>
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/wiki/',
                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" goldenview
+let g:goldenview__enable_default_mapping = 0
+" nmap <silent> <C-L>  <Plug>GoldenViewSplit
+nmap <leader>s <Plug>GoldenViewSplit
 
 " -----------------------------------------------------------------------------
 " | NeoBundle                                                                 |
@@ -322,6 +329,7 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'bling/vim-bufferline'
+NeoBundle 'zhaocai/GoldenView.Vim'
 " vim-scripts repos
 NeoBundle 'peaksea'
 NeoBundle 'vimwiki'
