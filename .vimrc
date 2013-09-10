@@ -330,6 +330,7 @@ NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'bling/vim-bufferline'
 NeoBundle 'zhaocai/GoldenView.Vim'
+NeoBundle 'dameninngenn/unite-converter-buffer-simple'
 " vim-scripts repos
 NeoBundle 'peaksea'
 NeoBundle 'vimwiki'
@@ -363,5 +364,7 @@ endif
 
 "unite settings
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom_source('buffer,buffer_tab', 'filters',
+            \ ['converters', 'converter_buffer_simple'])
 au BufReadPost *.md call unite#sources#outline#alias('vimwiki', 'markdown')
 
