@@ -1,5 +1,11 @@
 "vimrc by Saul <saul@saulhoward.com>
 
+" Go plugins from go distribution
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+filetype plugin indent on
+
 set nocompatible
 
 if has('vim_starting')
@@ -236,17 +242,15 @@ cmap w!! %!sudo tee > /dev/null %
 " remove separators
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 " remove unused modes
 let g:airline_enable_syntastic=0
-" set second section to filename
-let g:airline_section_b="%f"
-" empty third and fourth sections
-let g:airline_section_c=""
-let g:airline_section_x=""
-" put filetype in fifth section
-let g:airline_section_y="%Y"
 let g:airline_theme="dark"
 let g:airline_detect_whitespace=0
+
+" tabline at top
+let g:airline#extensions#tabline#enabled = 1
 
 " Unite
 let g:unite_source_history_yank_enable = 1
@@ -328,7 +332,6 @@ NeoBundle 'puppetlabs/puppet-syntax-vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'bling/vim-bufferline'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'dameninngenn/unite-converter-buffer-simple'
 " vim-scripts repos
