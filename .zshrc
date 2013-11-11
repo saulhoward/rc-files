@@ -4,6 +4,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 bindkey -v
+export KEYTIMEOUT=1
 bindkey '\e[3~' delete-char
 bindkey '^R' history-incremental-search-backward
 
