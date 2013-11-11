@@ -239,6 +239,10 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " reload file as sudo user
 cmap w!! %!sudo tee > /dev/null %
 
+" make space execute the 'q' macro (press qq to start recording, q to
+" stop,then [space] to execute.  super convenient)                            
+noremap <Space> @q
+
 " -----------------------------------------------------------------------------
 " | Plugins                                                                  |
 " -----------------------------------------------------------------------------
