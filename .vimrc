@@ -105,6 +105,11 @@ set textwidth=72
 set comments+=b:\"
 set comments+=n::
 
+" Delete comment character when joining commented lines
+if v:version > 703 || v:version == 703 && has("patch541")
+    set formatoptions+=j     
+endif
+
 " Colour column
 " let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(120,999),",")
@@ -350,7 +355,7 @@ syntax on
 set background=dark
 if has("gui_running")
     colorscheme tomorrow
-    set guifont=Ubuntu\ Mono\ 14
+    set guifont=Ubuntu\ Mono\ 13
     set guioptions-=m  "menu bar
     set guioptions-=T  "toolbar
     set guioptions+=LlRrb "scrollbars
