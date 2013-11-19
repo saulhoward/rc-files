@@ -338,7 +338,7 @@ NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'dameninngenn/unite-converter-buffer-simple'
-NeoBundle 'farseer90718/vim-taskwarrior'
+" NeoBundle 'farseer90718/vim-taskwarrior'
 " vim-scripts repos
 NeoBundle 'vimwiki'
 NeoBundle 'fountain.vim'
