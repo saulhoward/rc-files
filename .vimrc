@@ -105,11 +105,6 @@ set textwidth=72
 set comments+=b:\"
 set comments+=n::
 
-" Delete comment character when joining commented lines
-if v:version > 703 || v:version == 703 && has("patch541")
-    set formatoptions+=j     
-endif
-
 " Colour column
 " let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(120,999),",")
@@ -330,7 +325,7 @@ nmap <leader>s <Plug>GoldenViewSplit
 " -----------------------------------------------------------------------------
 
 " original repos on github
-NeoBundle 'saulhoward/molokai'
+NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/vimfiler.vim'
@@ -343,10 +338,12 @@ NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'dameninngenn/unite-converter-buffer-simple'
+NeoBundle 'farseer90718/vim-taskwarrior'
 " vim-scripts repos
-NeoBundle 'peaksea'
 NeoBundle 'vimwiki'
 NeoBundle 'fountain.vim'
+NeoBundle 'peaksea'
+NeoBundle 'zazen'
 
 filetype plugin indent on " required!
 
@@ -354,12 +351,12 @@ filetype plugin indent on " required!
 NeoBundleCheck
 
 " Colors **********************************************************************
-" Has to be after bundle because molokai is loaded
+" Has to be after bundle because theme is loaded then
 syntax on
 set background=dark
 if has("gui_running")
-    colorscheme tomorrow
-    set guifont=Ubuntu\ Mono\ 13
+    colorscheme base16-tomorrow
+    set guifont=Ubuntu\ Mono\ 14
     set guioptions-=m  "menu bar
     set guioptions-=T  "toolbar
     set guioptions+=LlRrb "scrollbars
@@ -371,7 +368,7 @@ if has("gui_running")
 "     colorscheme peaksea
 else
     set t_Co=256
-    colorscheme tomorrow
+    colorscheme base16-tomorrow
 endif
 
 "unite settings
