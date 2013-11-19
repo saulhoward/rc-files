@@ -14,8 +14,8 @@ compinit
 promptinit
  
 autoload -U colors && colors
-PROMPT="%{$fg_no_bold[magenta]%}%B%n@%m%b %{$fg_no_bold[yellow]%}%B▸▹%b %{$reset_color%}"
-RPROMPT=" %{$fg_no_bold[blue]%}%~%{$reset_color%}"
+PROMPT="%{$fg[green]%}%n@%m %{$fg[yellow]%}▸▹ %{$reset_color%}"
+RPROMPT=" %{$fg[blue]%}%~%{$reset_color%}"
 
 export PATH=$PATH:/home/saul/bin:/usr/local/bin
 export PATH=$PATH:/usr/bin/vendor_perl
