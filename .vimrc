@@ -355,7 +355,7 @@ NeoBundleCheck
 syntax on
 set background=dark
 if has("gui_running")
-    colorscheme base16-tomorrow
+    colorscheme base16-monokai
     set guifont=Ubuntu\ Mono\ 14
     set guioptions-=m  "menu bar
     set guioptions-=T  "toolbar
@@ -368,7 +368,7 @@ if has("gui_running")
 "     colorscheme peaksea
 else
     set t_Co=256
-    colorscheme base16-tomorrow
+    colorscheme base16-monokai
 endif
 
 "unite settings
