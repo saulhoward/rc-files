@@ -371,6 +371,9 @@ else
     colorscheme base16-monokai
 endif
 
+" Colorscheme overrides
+hi Comment cterm=italic gui=italic
+
 "unite settings
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom_source('buffer,buffer_tab', 'filters',
