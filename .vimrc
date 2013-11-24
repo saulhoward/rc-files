@@ -374,6 +374,13 @@ endif
 " Colorscheme overrides
 hi Comment cterm=italic gui=italic
 
+" disable Background Color Erase (BCE) so that color schemes
+" render properly when inside 256-color tmux and GNU screen.
+" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+if &term =~ 'rxvt'
+  set t_ut=
+endif
+
 "unite settings
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom_source('buffer,buffer_tab', 'filters',
