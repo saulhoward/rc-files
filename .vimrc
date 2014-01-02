@@ -219,7 +219,7 @@ map \h :let @/ = ""<CR>
 nnoremap \r :e!<CR>
 
 "Easy edit of vimrc
-nmap \s :source $MYVIMRC<CR>
+" nmap \s :source $MYVIMRC<CR>
 nmap \v :e $MYVIMRC<CR>
 
 "show indent settings
@@ -320,6 +320,9 @@ let g:goldenview__enable_default_mapping = 0
 " nmap <silent> <C-L>  <Plug>GoldenViewSplit
 nmap <leader>s <Plug>GoldenViewSplit
 
+" LiteDFM
+nnoremap <Leader>z :LiteDFMToggle<CR>
+
 " -----------------------------------------------------------------------------
 " | NeoBundle                                                                 |
 " -----------------------------------------------------------------------------
@@ -338,6 +341,7 @@ NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'dameninngenn/unite-converter-buffer-simple'
+NeoBundle 'bilalq/lite-dfm'
 " NeoBundle 'farseer90718/vim-taskwarrior'
 " vim-scripts repos
 NeoBundle 'vimwiki'
