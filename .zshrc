@@ -27,6 +27,7 @@ alias ll='ls -lh --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --colo
 
 # tmux assume 256 colour
 alias tmux='tmux -2'
+alias ta='tmux attach'
 
 # taskwarrior
 alias tls='task ls'
