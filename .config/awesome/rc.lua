@@ -158,7 +158,7 @@ markup = lain.util.markup
 blue   = beautiful.fg_focus
 
 -- Textclock
-mytextclock = awful.widget.textclock("<span font='Tamsyn 5'> </span><span font='Ubuntu mono 10.5'>%H:%M</span> ")
+mytextclock = awful.widget.textclock("<span font='Tamsyn 5'> </span><span font='Ubuntu mono bold 10.5'>%H:%M</span> ")
 
 -- Calendar
 lain.widgets.calendar:attach(mytextclock)
@@ -328,15 +328,19 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(small_spr)
-    right_layout:add(baticon)
-    right_layout:add(batwidget)
-    right_layout:add(bar_spr)
-    right_layout:add(volicon)
-    right_layout:add(volumewidget)
-    right_layout:add(bar_spr)
-    right_layout:add(mytextclock)
+    if s == 1 then
+        right_layout:add(spr)
+        right_layout:add(bar_spr)
+        right_layout:add(wibox.widget.systray())
+        right_layout:add(bar_spr)
+        right_layout:add(baticon)
+        right_layout:add(batwidget)
+        right_layout:add(bar_spr)
+        right_layout:add(volicon)
+        right_layout:add(volumewidget)
+        right_layout:add(bar_spr)
+        right_layout:add(mytextclock)
+    end
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()

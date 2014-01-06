@@ -1,7 +1,7 @@
 --[[
                                
-     Copland Awesome WM config 
-     github.com/copycat-killer 
+     neuro theme for Awesome WM
+     saulhoward.com
                                
 --]]
 
@@ -38,11 +38,12 @@ theme.border_floating = theme.mid_grey
 theme.border_focus  = theme.purple
 theme.border_marked = "#91231c"
 
-theme.taglist_fg_focus                          = "#FFFFEF"
-theme.taglist_bg_focus                          = "#111111"
-theme.taglist_bg_normal                         = "#111111"
-theme.titlebar_bg_normal                        = "#191919"
-theme.titlebar_bg_focus                         = "#262626"
+theme.taglist_fg_focus                          = theme.white
+theme.taglist_bg_focus                          = theme.dark_grey
+theme.taglist_bg_normal                         = theme.light_grey
+
+theme.titlebar_bg_normal                        = theme.light_grey
+theme.titlebar_bg_focus                         = theme.purple
 
 theme.mouse_finder_color = "#CC9393"
 
@@ -58,8 +59,8 @@ theme.tasklist_disable_icon                     = true
 
 theme.awesome_icon                              = theme.dir .."/icons/bolt.jpg"
 theme.menu_submenu_icon                         = theme.dir .."/icons/submenu.png"
-theme.taglist_squares_sel                       = theme.dir .. "/icons/square_unsel.png"
-theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel.png"
+theme.taglist_squares_sel                       = theme.dir .. "/icons/taglist_f.png"
+theme.taglist_squares_unsel                     = theme.dir .. "/icons/taglist_u.png"
 theme.widget_bg                                 = theme.dir .. "/icons/widget_bg.png"
 theme.vol                                       = theme.dir .. "/icons/vol.png"
 theme.vol_low                                   = theme.dir .. "/icons/vol_low.png"
