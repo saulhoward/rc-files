@@ -168,6 +168,8 @@ au FileType * exec('setlocal dict+='.$VIMRUNTIME.'/syntax/'.expand('<amatch>').'
 
 au BufRead,BufNewFile *.pp              set filetype=puppet
 
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 " Redraw *********************************************************************
 set ttyfast
 "set ttyscroll=0
