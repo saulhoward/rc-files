@@ -145,6 +145,8 @@ augroup mkd
     autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 augroup END
 au BufRead,BufNewFile *.fountain     set filetype=fountain
+" no text wrapping for markdown, fountain
+au BufRead,BufNewFile *.fountain,*.mkd set wrap linebreak nolist textwidth=0 wrapmargin=0
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
@@ -221,7 +223,7 @@ map \h :let @/ = ""<CR>
 nnoremap \r :e!<CR>
 
 "Easy edit of vimrc
-" nmap \s :source $MYVIMRC<CR>
+nmap \s :source $MYVIMRC<CR>
 nmap \v :e $MYVIMRC<CR>
 
 "show indent settings
@@ -317,13 +319,6 @@ nmap <F3> :silent %w !xclip -selection clipboard<CR>
 let g:vimwiki_list = [{'path': '~/Dropbox/wiki/',
                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
-" goldenview
-let g:goldenview__enable_default_mapping = 0
-" nmap <silent> <C-L>  <Plug>GoldenViewSplit
-nmap <leader>s <Plug>GoldenViewSplit
-
-" LiteDFM
-nnoremap <Leader>z :LiteDFMToggle<CR>
 
 " -----------------------------------------------------------------------------
 " | NeoBundle                                                                 |
@@ -341,17 +336,28 @@ NeoBundle 'puppetlabs/puppet-syntax-vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'ledger/vim-ledger'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'dameninngenn/unite-converter-buffer-simple'
-NeoBundle 'bilalq/lite-dfm'
-" NeoBundle 'farseer90718/vim-taskwarrior'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'saulhoward/kaodam'
 " vim-scripts repos
 NeoBundle 'vimwiki'
 NeoBundle 'fountain.vim'
 NeoBundle 'peaksea'
-NeoBundle 'zazen'
 
 filetype plugin indent on " required!
+
+" Goyo (distraction free)
+NeoBundleLazy 'junegunn/goyo.vim', {'autoload':{'commands':['Goyo']}} "{{{
+    let g:goyo_bg=252525
+    nnoremap <Leader>z :Goyo<CR>
+    "}}}
+
+" Goldenview (split manager)
+NeoBundleLazy 'zhaocai/GoldenView.Vim', {'autoload':{'mappings':['<Plug>ToggleGoldenViewAutoResize', '<Plug>GoldenViewSplit']}} "{{{
+    let g:goldenview__enable_default_mapping=0
+    nmap <F4> <Plug>ToggleGoldenViewAutoResize
+    nmap <leader>s <Plug>GoldenViewSplit
+    "}}}
 
 " Installation check.
 NeoBundleCheck
@@ -379,6 +385,10 @@ endif
 
 " Colorscheme overrides
 hi Comment cterm=italic gui=italic
+
+" Set zazen colorscheme for fountain
+" autocmd! BufEnter,BufNewFile *.fountain colo zazen
+" autocmd! BufLeave *.fountain colo base16-monokai
 
 " disable Background Color Erase (BCE) so that color schemes
 " render properly when inside 256-color tmux and GNU screen.
