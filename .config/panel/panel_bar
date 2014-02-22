@@ -4,14 +4,21 @@
 
 while read -r line ; do
 	case $line in
-		S*)
+		c*)
 			# clock output
-			sys_infos="\\br\\f7${line#?}"
+			clock="\\br\\f7${line#?}"
+			;;
+		b*)
+			# battery output
+			bat="\\br\\f4${line#?}"
 			;;
 		T*)
 			# xtitle output
 			title="\\br\\f4${line#?}"
-			;;
+            ;;
+        v*)
+			# vol output
+            vol="\\fr${line#?}" ;;
 		W*)
 			# bspwm internal state
 			wm_infos=""
@@ -55,5 +62,6 @@ while read -r line ; do
 			done
 			;;
 	esac
-	printf "%s\n" "\\l $wm_infos \\c $title \\r $sys_infos  "
+	# printf "%s\n" "\\l $wm_infos \\c $title \\r $clock  "
+    printf "%s\n" "\\br\\l$wm_infos  $title  \\r  $vol \\f0| $bat \\f0| $clock \\br"
 done

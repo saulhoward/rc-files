@@ -94,3 +94,9 @@ super + space
 # make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
+
+# Volume
+XF86AudioMute
+    amixer set Master toggle
+XF86Audio{Lower,Raise}Volume
+    amixer set Master {4-,4+} unmute

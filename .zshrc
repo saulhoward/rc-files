@@ -37,3 +37,5 @@ export GOPATH=/srv/go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOPATH/bin
 
+# X
+# xrdb -load ~/.Xresources

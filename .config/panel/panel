@@ -1,0 +1,46 @@
+#!/bin/sh
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+bspc config top_padding $PANEL_HEIGHT
+bspc control --subscribe > "$PANEL_FIFO" &
+
+function vol() {
+    while true; do
+        echo "v"$(amixer get Master | grep -o [-0-9.]*dB | sed 's/\.00/\\f7/g')
+        sleep 3
+    done
+}
+
+function tim() {
+    while true; do
+        echo "c"$(date +'\f8%A \f7%d.%b \f2%H:%M')
+        sleep 1
+    done
+}
+
+#Define the battery
+function bat() {
+    while true; do
+        echo "b"$(acpi --battery | awk -F, '{print $2}')
+        sleep 1;
+    done
+}
+
+# Print the percentage
+
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+vol > "$PANEL_FIFO" &
+tim > "$PANEL_FIFO" &
+bat > "$PANEL_FIFO" &
+
+cat "$PANEL_FIFO" | /home/saul/.config/panel/panel_bar | bar &
+
+wait

@@ -10,8 +10,6 @@ done
 NMON=$i
 unset i
 
-bspc config top_padding 14 
-
 # Visual options
 bspc config split_ratio         0.50
 bspc config border_width        3
@@ -42,4 +40,4 @@ bspc rule -a Conky sticky=on manage=off lower=on
 bspc rule -a astime sticky=on
 bspc rule -a feh floating=on manage=off
 
-/home/saul/.config/bspwm/panel/panel &
+/home/saul/.config/panel/panel &
