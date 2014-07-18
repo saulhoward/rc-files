@@ -170,7 +170,7 @@ au FileType * exec('setlocal dict+='.$VIMRUNTIME.'/syntax/'.expand('<amatch>').'
 
 au BufRead,BufNewFile *.pp              set filetype=puppet
 
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
 " Redraw *********************************************************************
 set ttyfast
@@ -332,6 +332,7 @@ NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'fatih/vim-go'
 NeoBundle 'puppetlabs/puppet-syntax-vim'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'ledger/vim-ledger'
