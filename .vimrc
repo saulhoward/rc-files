@@ -8,11 +8,16 @@ filetype plugin indent on
 
 set nocompatible
 
+" -----------------------------------------------------------------------------
+" | NeoBundle                                                                 |
+" -----------------------------------------------------------------------------
+
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
+
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'windows' : 'make -f make_mingw32.mak',
@@ -21,6 +26,43 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+
+" original repos on github
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'puppetlabs/puppet-syntax-vim'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'ledger/vim-ledger'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'dameninngenn/unite-converter-buffer-simple'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'saulhoward/kaodam'
+" vim-scripts repos
+NeoBundle 'vimwiki'
+NeoBundle 'fountain.vim'
+NeoBundle 'peaksea'
+
+filetype plugin indent on " required!
+
+NeoBundle 'junegunn/goyo.vim'
+let g:goyo_bg=252525
+nnoremap <Leader>z :Goyo<CR>
+                                                                                                                                                          
+NeoBundle 'zhaocai/GoldenView.Vim'
+let g:goldenview__enable_default_mapping=0
+nmap <F4> <Plug>ToggleGoldenViewAutoResize
+nmap <leader>s <Plug>GoldenViewSplit
+
+call neobundle#end()
+
+" Installation check.
+NeoBundleCheck
 
 autocmd!
 set autoread
@@ -223,7 +265,7 @@ map \h :let @/ = ""<CR>
 nnoremap \r :e!<CR>
 
 "Easy edit of vimrc
-nmap \s :source $MYVIMRC<CR>
+"nmap \s :source $MYVIMRC<CR>
 nmap \v :e $MYVIMRC<CR>
 
 "show indent settings
@@ -318,50 +360,6 @@ nmap <F3> :silent %w !xclip -selection clipboard<CR>
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/wiki/',
                      \ 'syntax': 'markdown', 'ext': '.md'}]
-
-
-" -----------------------------------------------------------------------------
-" | NeoBundle                                                                 |
-" -----------------------------------------------------------------------------
-
-" original repos on github
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'puppetlabs/puppet-syntax-vim'
-NeoBundle 'groenewege/vim-less'
-NeoBundle 'ledger/vim-ledger'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'dameninngenn/unite-converter-buffer-simple'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'saulhoward/kaodam'
-" vim-scripts repos
-NeoBundle 'vimwiki'
-NeoBundle 'fountain.vim'
-NeoBundle 'peaksea'
-
-filetype plugin indent on " required!
-
-" Goyo (distraction free)
-NeoBundleLazy 'junegunn/goyo.vim', {'autoload':{'commands':['Goyo']}} "{{{
-    let g:goyo_bg=252525
-    nnoremap <Leader>z :Goyo<CR>
-    "}}}
-
-" Goldenview (split manager)
-NeoBundleLazy 'zhaocai/GoldenView.Vim', {'autoload':{'mappings':['<Plug>ToggleGoldenViewAutoResize', '<Plug>GoldenViewSplit']}} "{{{
-    let g:goldenview__enable_default_mapping=0
-    nmap <F4> <Plug>ToggleGoldenViewAutoResize
-    nmap <leader>s <Plug>GoldenViewSplit
-    "}}}
-
-" Installation check.
-NeoBundleCheck
 
 " Colors **********************************************************************
 " Has to be after bundle because theme is loaded then
